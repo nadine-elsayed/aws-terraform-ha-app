@@ -1,3 +1,15 @@
+terraform {
+  required_version = ">= 1.6.0"
+
+  backend "s3" {
+    bucket         = "nadine-terraform-state"
+    key            = "terraform.tfstate"
+    region         = "eu-north-1"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
+}
+
 module "vpc" {
   source = "./vpc"
   azs    = ["eu-north-1a", "eu-north-1b"]
